@@ -2,7 +2,7 @@ version: '3.7'
 
 services:     
   mariadb:
-    container_name: web-mariadb-2
+    container_name: web-mariadb-11
     hostname: mariadb
     image: mariadb:11.2
     restart: always
@@ -15,7 +15,7 @@ services:
       - "5031:3306"
       
   web:
-    container_name: web-app-calculator-2
+    container_name: web-app-calculator-11
     hostname: app
     build: ./
     ports:

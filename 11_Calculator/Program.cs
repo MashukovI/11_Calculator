@@ -1,3 +1,6 @@
+using _11_Calculator;
+using Microsoft.EntityFrameworkCore;
+
 namespace _11_Calculator
 {
     public class Program
@@ -5,6 +8,10 @@ namespace _11_Calculator
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            var connStr = builder.Configuration.GetConnectionString("Main");
+
+            builder.Services.AddDbContext<MainDbContext>(opt => opt.UseMySql(connStr, new MySqlServerVersion(new Version(11, 2))));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

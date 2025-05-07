@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using _11_Calculator;
+using Microsoft.AspNetCore.Mvc;
 
 namespace _11_Calculator.Controllers
 {
@@ -6,6 +7,13 @@ namespace _11_Calculator.Controllers
 
     public class CalculatorController : Controller
     {
+        private readonly MainDbContext _dbContext;
+
+        public CalculatorController(MainDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -14,7 +22,7 @@ namespace _11_Calculator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Calculate(double num1, double num2, Operation operation)
+        public async Task<IActionResult> Calculate(double num1, double num2, Operation operation)
         {
             double result = 0;
             switch (operation)
@@ -32,6 +40,18 @@ namespace _11_Calculator.Controllers
                     result = num1 / num2;
                     break;
             }
+
+            var newRecord = new CalcModel
+            {
+                Num1 = num1,
+                Num2 = num2,
+                Operation = operation,
+                Result = result
+            };
+
+            await _dbContext.CalcModels.AddAsync(newRecord);
+            await _dbContext.SaveChangesAsync();
+
             ViewBag.Result = result;
             return View("Index");
         }

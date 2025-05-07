@@ -10,8 +10,8 @@ using _11_Calculator;
 namespace _11_Calculator.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20250507072231_m_init")]
-    partial class m_init
+    [Migration("20250507094456_MigDB")]
+    partial class MigDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

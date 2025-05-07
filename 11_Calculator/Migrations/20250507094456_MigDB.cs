@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace _11_Calculator.Migrations
 {
-    public partial class m_init : Migration
+    public partial class MigDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

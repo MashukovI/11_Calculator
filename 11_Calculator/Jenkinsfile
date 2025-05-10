@@ -9,13 +9,13 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'ls -la 11_Calculator/docker-compose.yml || echo "Docker-compose file not foundJokerge"'
-                sh 'docker-compose -f ./11_Calculator/docker-compose.yml build'
+                sh 'ls -l'
+                sh 'docker compose -f ./11_Calculator/docker-compose.yml build'
             }
         }
 		stage('Start Docker Container') {
             steps {
-                sh 'docker-compose -f ./11_Calculator/docker-compose.yml up -d'
+                sh 'docker compose -f ./11_Calculator/docker-compose.yml up -d'
             }
         }
     }
